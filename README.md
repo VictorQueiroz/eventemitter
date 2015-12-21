@@ -6,5 +6,15 @@ bower install --save eventemitter
 ```
 
 ### Usage
+```js
+var em = new EventEmitter();
 
-[How to use EventEmitter tutorial](https://iojs.org/api/events.html)
+em.on('update', function(value) {
+	if(value == em.lastValue) {
+		return false;
+	}
+
+	em.value = value;
+	em.lastValue = value;
+});
+```

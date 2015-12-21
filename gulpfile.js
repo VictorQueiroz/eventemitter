@@ -4,11 +4,18 @@ var concat = require('gulp-concat');
 var wrapper = require('gulp-wrapper');
 
 gulp.task('scripts', function () {
-	gulp.src(['src/eventemitter.js'])
+	var footer = `
+		window.eventemitter = {
+			EventEmitter: EventEmitter,
+		};
+	}(window));`;
+
+	gulp.src(['src/helpers', 'src/*.js'])
+	.pipe(concat('eventemitter.js'))
 	.pipe(wrapper({
-		header: `(function () {`,
-		footer: `}).call(this);`
+		header: `(function (window) {`,
+		footer: footer
 	}))
 	.pipe(uglify())
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('build'));
 })

@@ -11,5 +11,6 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "main": "build/eventemitter.js"
 }

@@ -10,13 +10,14 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha','should'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      'src/eventemitter.js',
-      'src/eventemitter_test.js'
+      'src/helpers.js',
+      'src/*.js',
+      'test/*.js'
     ],
 
 
