@@ -19,14 +19,22 @@ describe('EventEmitter', function() {
 			expect(listenerSpy).toHaveBeenCalledWith(1, 2, 3, 4);
 		});
 
-		it('should return "false" if some listener return something that is not undefined and not true', function() {
-			em.on('someCoolEvent', noop);
-
+		it('should return "false" if some listener return something that is not "undefined" and not true', function() {
+			for(var i = 0; i < 10; i++) {
+				em.on('someCoolEvent', constant(undefined));
+			}
 			expect(em.emit('someCoolEvent')).toBeTruthy();
 
-			em.on('someCoolEvent', constant(false));
-
+			var falseListener = constant(false);
+			em.on('someCoolEvent', falseListener);
 			expect(em.emit('someCoolEvent')).toBeFalsy();
+
+			em.off('someCoolEvent', falseListener);
+			expect(em.emit('someCoolEvent')).toBeTruthy();
+		});
+
+		it('should return true for events with no listener', function() {
+			expect(em.emit('someListenerLessEvent')).toBeTruthy();
 		});
 	});
 

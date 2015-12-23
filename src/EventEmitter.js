@@ -43,9 +43,9 @@ EventEmitter.prototype = {
       return results.every(function(result) {
         return isUndefined(result) ? true : result;
       });
-    } else {
-      return false;
     }
+
+    return true;
   },
 
   removeAllListeners: function() {
