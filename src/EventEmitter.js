@@ -41,7 +41,7 @@ EventEmitter.prototype = {
       }
 
       return results.every(function(result) {
-        return isDefined(result) ? result : true;
+        return isUndefined(result) ? true : result;
       });
     } else {
       return false;
