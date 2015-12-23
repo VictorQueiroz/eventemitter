@@ -35,6 +35,12 @@ describe('EventEmitter', function() {
 
 		it('should return true for events with no listener', function() {
 			expect(em.emit('someListenerLessEvent')).toBeTruthy();
+
+			em.on('someListenerLessEvent', noop);
+			em.off('someListenerLessEvent', noop);
+			expect(em._events.someListenerLessEvent).toEqual([]);
+
+			expect(em.emit('someListenerLessEvent')).toBeTruthy();
 		});
 	});
 
