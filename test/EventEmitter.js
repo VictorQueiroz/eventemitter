@@ -79,11 +79,14 @@ describe('EventEmitter', function() {
 
 		it('should remove all the listeners of the event emitter', function() {
 			for(var i = 0; i < 10; i++) {
+				em.on('anotherEvent', listenerSpy);
 				em.on('someEventListener', listenerSpy);
 			}
+			expect(em._events.anotherEvent.length).toBe(10);
 			expect(em._events.someEventListener.length).toBe(10);
 
 			em.removeAllListeners();
+			expect(em._events.anotherEvent.length).toBe(0);
 			expect(em._events.someEventListener.length).toBe(0);
 		});
 	});
